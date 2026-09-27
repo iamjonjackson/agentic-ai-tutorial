@@ -8,6 +8,31 @@ client = OpenAI(
 )
 
 SYSTEM_MESSAGE = "You are a terminal assistant. Be concise."
+TOOLS = []
+
+
+def dispatch(call):
+    return f"error: unknown tool {call.function.name}"
+
+
+def run_agent(messages, max_turns=25):
+    for _ in range(max_turns):
+        reply = client.chat.completions.create(
+            model="mistral-small-latest",
+            messages=messages,
+            tools=TOOLS,
+        )
+        message = reply.choices[0].message
+        messages.append(message)
+        if not message.tool_calls:
+            print(message.content)
+            return
+        for call in message.tool_calls:
+            result = dispatch(call)
+            messages.append(
+                {"role": "tool", "tool_call_id": call.id, "content": result}
+            )
+    print("(max turns reached)")
 
 
 def main():
@@ -17,12 +42,7 @@ def main():
         if user_input.strip().lower() in ("exit", "quit"):
             break
         messages.append({"role": "user", "content": user_input})
-        reply = client.chat.completions.create(
-            model="mistral-small-latest",
-            messages=messages,
-        )
-        messages.append(reply.choices[0].message)
-        print(reply.choices[0].message.content)
+        run_agent(messages)
 
 
 if __name__ == "__main__":
