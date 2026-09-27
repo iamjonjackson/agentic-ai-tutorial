@@ -14,7 +14,7 @@ Pass 1 = build/wip build-out. Pass 2 = clean replay onto main. Update the row fo
 | steps/60-stage5-presidio.md | pass1 | done | build/wip 7dc3b16 | model saw placeholders; disk data intact; spacy model note added to step file |
 | steps/70-stage6-rag.md | pass1 | done | build/wip 1035d00 | ingest+search_docs verified; presidio false positive on '22 minutes' noted |
 | steps/sq1-gmail.md | pass1 | human-check (OAuth consent + first send need a human; mock tests pass at a661b69) | build/wip a661b69 | 4 mock tests green |
-| steps/sq2-gateway.md | pass1 | not-started | | |
+| steps/sq2-gateway.md | pass1 | in-progress | | |
 | steps/sq3-ollama.md | pass1 | not-started | | |
 | steps/sq4-voice.md | pass1 | not-started | | no microphone in codespace — human-check |
 | steps/00-setup.md | pass2 | not-started | | |
