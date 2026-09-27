@@ -35,8 +35,20 @@ def run_agent(messages, max_turns=25):
     print("(max turns reached)")
 
 
+def load_project_memory(cwd):
+    for name in ("AGENT.md", "CLAUDE.md"):
+        path = os.path.join(cwd, name)
+        if os.path.isfile(path):
+            with open(path) as f:
+                return f.read(4000)
+    return ""
+
+
 def main():
     messages = [{"role": "system", "content": SYSTEM_MESSAGE}]
+    memory = load_project_memory(os.getcwd())
+    if memory:
+        messages.append({"role": "user", "content": memory})
     while True:
         user_input = input("> ")
         if user_input.strip().lower() in ("exit", "quit"):
