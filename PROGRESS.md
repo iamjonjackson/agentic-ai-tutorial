@@ -16,7 +16,7 @@ Pass 1 = build/wip build-out. Pass 2 = clean replay onto main. Update the row fo
 | steps/sq1-gmail.md | pass1 | human-check (OAuth consent + first send need a human; mock tests pass at a661b69) | build/wip a661b69 | 4 mock tests green |
 | steps/sq2-gateway.md | pass1 | done | build/wip 4a7a3ca | agent identical via gateway; config flip to open-mistral-nemo verified |
 | steps/sq3-ollama.md | pass1 | done | build/wip dd85b9e | verified with qwen2.5:0.5b (hf.co pulls blocked here); mkdir tool call worked locally |
-| steps/sq4-voice.md | pass1 | in-progress | | no microphone in codespace — human-check |
+| steps/sq4-voice.md | pass1 | human-check (no microphone in sandbox; TTS/STT API round-trip verified at 64b9ac1) | build/wip 64b9ac1 | tts->stt loop verified; step file model names corrected |
 | steps/00-setup.md | pass2 | not-started | | |
 | steps/10-stage0-chat-loop.md | pass2 | not-started | | |
 | steps/20-stage1-agent-loop.md | pass2 | not-started | | |
