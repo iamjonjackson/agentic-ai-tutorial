@@ -6,7 +6,7 @@ Pass 1 = build/wip build-out. Pass 2 = clean replay onto main. Update the row fo
 |---|---|---|---|---|
 | steps/00-setup.md | pass1 | done | build/wip 1a08658 | deps ok |
 | steps/10-stage0-chat-loop.md | pass1 | done | build/wip 9e52cc4 | two-turn memory verified via piped input |
-| steps/20-stage1-agent-loop.md | pass1 | in-progress | | |
+| steps/20-stage1-agent-loop.md | pass1 | done | build/wip 9b448bb | loop exits after one call; max_turns cap verified |
 | steps/30-stage2-fs-tools.md | pass1 | not-started | | |
 | steps/31-stage2-search-tool.md | pass1 | not-started | | |
 | steps/40-stage3-policy.md | pass1 | not-started | | |
