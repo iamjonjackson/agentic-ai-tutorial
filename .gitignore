@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# tutorial: secrets and build artifacts
+.rag/
+token.json
+credentials.json
