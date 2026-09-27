@@ -3,6 +3,7 @@ import os
 from openai import OpenAI
 
 from agent import tools_fs
+from agent.scrub import scrub
 
 client = OpenAI(
     api_key=os.environ["MISTRAL_API_KEY"],
@@ -30,7 +31,7 @@ def run_agent(messages, max_turns=25):
         for call in message.tool_calls:
             result = dispatch(call)
             messages.append(
-                {"role": "tool", "tool_call_id": call.id, "content": result}
+                {"role": "tool", "tool_call_id": call.id, "content": scrub(result)}
             )
     print("(max turns reached)")
 
