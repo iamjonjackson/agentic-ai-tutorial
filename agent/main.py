@@ -2,7 +2,7 @@ import os
 
 from openai import OpenAI
 
-from agent import rag, tools_fs
+from agent import rag, tools_fs, tools_gmail
 from agent.scrub import scrub
 
 client = OpenAI(
@@ -11,10 +11,13 @@ client = OpenAI(
 )
 
 SYSTEM_MESSAGE = "You are a terminal assistant. Be concise."
-TOOLS = tools_fs.TOOLS + rag.RAG_TOOLS
+TOOLS = tools_fs.TOOLS + rag.RAG_TOOLS + tools_gmail.GMAIL_TOOLS
 
 dispatch = tools_fs.dispatch
 tools_fs.TOOL_IMPLS.update(rag.RAG_TOOL_IMPLS)
+tools_fs.TOOL_IMPLS.update(tools_gmail.GMAIL_TOOL_IMPLS)
+from agent import policy
+policy.ASK.add("send_mail")
 
 
 def run_agent(messages, max_turns=25):

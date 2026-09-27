@@ -4,5 +4,5 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {}
   },
-  "postCreateCommand": "pip install openai presidio-analyzer presidio-anonymizer pypdf chromadb"
+  "postCreateCommand": "pip install openai presidio-analyzer presidio-anonymizer pypdf chromadb google-api-python-client google-auth-httplib2 google-auth-oauthlib"
 }
