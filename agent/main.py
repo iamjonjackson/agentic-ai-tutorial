@@ -2,7 +2,7 @@ import os
 
 from openai import OpenAI
 
-from agent import tools_fs
+from agent import rag, tools_fs
 from agent.scrub import scrub
 
 client = OpenAI(
@@ -11,9 +11,10 @@ client = OpenAI(
 )
 
 SYSTEM_MESSAGE = "You are a terminal assistant. Be concise."
-TOOLS = tools_fs.TOOLS
+TOOLS = tools_fs.TOOLS + rag.RAG_TOOLS
 
 dispatch = tools_fs.dispatch
+tools_fs.TOOL_IMPLS.update(rag.RAG_TOOL_IMPLS)
 
 
 def run_agent(messages, max_turns=25):
