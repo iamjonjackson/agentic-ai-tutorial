@@ -11,7 +11,7 @@ Pass 1 = build/wip build-out. Pass 2 = clean replay onto main. Update the row fo
 | steps/31-stage2-search-tool.md | pass1 | done | build/wip 79ee8dc | search->pick->read chain verified |
 | steps/40-stage3-policy.md | pass1 | done | build/wip 07674c5 | y/N prompt, deny and allow paths all verified |
 | steps/50-stage4-project-memory.md | pass1 | done | build/wip 75c9944 | one-sentence rule honored; reverts without file |
-| steps/60-stage5-presidio.md | pass1 | in-progress | | |
+| steps/60-stage5-presidio.md | pass1 | done | build/wip 7dc3b16 | model saw placeholders; disk data intact; spacy model note added to step file |
 | steps/70-stage6-rag.md | pass1 | not-started | | |
 | steps/sq1-gmail.md | pass1 | not-started | | OAuth consent + first send need a human |
 | steps/sq2-gateway.md | pass1 | not-started | | |
