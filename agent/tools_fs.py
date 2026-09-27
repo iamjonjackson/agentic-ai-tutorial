@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 JAIL_ROOT = os.path.realpath(os.getcwd())
 
@@ -61,12 +62,40 @@ def mkdir(path):
     return f"created directory {path}"
 
 
+def search_files(pattern, path=None, max_results=50):
+    root = _resolve(path)
+    regex = re.compile(pattern)
+    matches = []
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if not d.startswith(".")]
+        for filename in filenames:
+            filepath = os.path.join(dirpath, filename)
+            try:
+                with open(filepath, errors="ignore") as f:
+                    for lineno, line in enumerate(f, 1):
+                        if regex.search(line):
+                            entry = f"{filepath}:{lineno}:{line.strip()[:200]}"
+                            matches.append(entry)
+                            if len(matches) >= max_results:
+                                matches.append(
+                                    f"(truncated at {max_results} matches — "
+                                    "narrow the pattern or path and search again)"
+                                )
+                                return "\n".join(matches)
+            except (OSError, UnicodeDecodeError):
+                continue
+    if not matches:
+        return f"(no matches for '{pattern}')"
+    return "\n".join(matches)
+
+
 TOOL_IMPLS = {
     "list_dir": list_dir,
     "read_file": read_file,
     "write_file": write_file,
     "cd": cd,
     "mkdir": mkdir,
+    "search_files": search_files,
 }
 
 TOOLS = [
@@ -130,6 +159,22 @@ TOOLS = [
                     "path": {"type": "string", "description": "Directory to move to."},
                 },
                 "required": ["path"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_files",
+            "description": "Search file contents recursively under the working directory (or path) for a regex pattern. Returns matching lines as path:line:text. Results are capped; if truncated, narrow the pattern or path and search again.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "pattern": {"type": "string", "description": "Regex pattern to match against each line."},
+                    "path": {"type": "string", "description": "Directory to search under. Defaults to the working directory."},
+                    "max_results": {"type": "integer", "description": "Maximum number of matching lines to return. Default 50."},
+                },
+                "required": ["pattern"],
             },
         },
     },
