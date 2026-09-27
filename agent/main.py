@@ -1,4 +1,5 @@
 import os
+import sys
 
 from openai import OpenAI
 
@@ -50,6 +51,10 @@ def load_project_memory(cwd):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--voice":
+        from agent.voice import run_voice_mode
+        run_voice_mode()
+        return
     messages = [{"role": "system", "content": SYSTEM_MESSAGE}]
     memory = load_project_memory(os.getcwd())
     if memory:
