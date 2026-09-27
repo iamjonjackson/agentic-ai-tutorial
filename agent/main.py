@@ -2,17 +2,17 @@ import os
 
 from openai import OpenAI
 
+from agent import tools_fs
+
 client = OpenAI(
     api_key=os.environ["MISTRAL_API_KEY"],
     base_url="https://api.mistral.ai/v1",
 )
 
 SYSTEM_MESSAGE = "You are a terminal assistant. Be concise."
-TOOLS = []
+TOOLS = tools_fs.TOOLS
 
-
-def dispatch(call):
-    return f"error: unknown tool {call.function.name}"
+dispatch = tools_fs.dispatch
 
 
 def run_agent(messages, max_turns=25):
