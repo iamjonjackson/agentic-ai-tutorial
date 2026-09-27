@@ -2,7 +2,8 @@
   "name": "agentic-tutorial",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {}
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/ollama:1": {}
   },
   "postCreateCommand": "pip install openai presidio-analyzer presidio-anonymizer pypdf chromadb google-api-python-client google-auth-httplib2 google-auth-oauthlib"
 }

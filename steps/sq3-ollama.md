@@ -5,8 +5,8 @@ Run the agent against a local model — no API key, no data leaving the machine.
 
 ## Do
 1. Add the Ollama devcontainer feature: `"ghcr.io/devcontainers/features/ollama:1": {}`.
-2. `ollama pull hf.co/mistralai/Ministral-3B-instruct-2412-GGUF:Q4_K_M`.
-3. Swap the client: `base_url="http://localhost:11434/v1"`, `api_key="ollama"`, model name matching the pull.
+2. `ollama pull hf.co/mistralai/Ministral-3B-instruct-2412-GGUF:Q4_K_M`. (Reality note: in the pass-1 sandbox this hf.co-prefixed pull was blocked by network policy; the loop was verified with a registry model, `qwen2.5:0.5b`, another small function-calling model. The swap procedure is identical — only the model name changes.)
+3. Swap the client: `base_url="http://localhost:11434/v1"`, `api_key="ollama"`, model name matching the pull. No code change is needed to test: override `main.client.base_url`/`main.client.api_key` after import and pass the model name via the `create` call, or edit the two literals in `main.py`.
 4. Stress-test tool calling and add retry/error handling for malformed JSON arguments and hallucinated tool names — small local models fail at structured tool use far earlier than API models.
 
 ## Production parallels
