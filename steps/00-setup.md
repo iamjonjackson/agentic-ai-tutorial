@@ -17,7 +17,7 @@ A codespace that boots with everything the core tutorial needs installed.
 }
 ```
 
-2. Create `.gitignore` containing: `.rag/`, `token.json`, `credentials.json`, `.env`, `__pycache__/`.
+2. Ensure `.gitignore` contains these entries (append any that are missing; a Python-template `.gitignore` may already cover `.env` and `__pycache__/`): `.rag/`, `token.json`, `credentials.json`, `.env`, `__pycache__/`.
 3. Put `AGENTS.md` (repo conventions) in the repo root.
 4. Create `requirements.txt` listing the same packages as postCreateCommand.
 
