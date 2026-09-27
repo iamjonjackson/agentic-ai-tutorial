@@ -2,6 +2,8 @@ import json
 import os
 import re
 
+from agent import policy
+
 JAIL_ROOT = os.path.realpath(os.getcwd())
 
 CWD = {"cwd": os.getcwd()}
@@ -204,6 +206,16 @@ def dispatch(call):
         args = json.loads(call.function.arguments or "{}")
     except json.JSONDecodeError as e:
         return f"error: invalid tool arguments: {e}"
+    decision = policy.policy_check(name, args)
+    if decision == "deny":
+        return (
+            f"The tool call {name} was denied by the permission system. "
+            "Choose another approach or ask the user."
+        )
+    if decision == "ask":
+        print(f"[approval] {name}({args}) — allow? [y/N]", flush=True)
+        if input().strip().lower() != "y":
+            return "User denied this tool call. Ask them why if unclear."
     try:
         result = impl(**args)
     except PermissionError as e:
