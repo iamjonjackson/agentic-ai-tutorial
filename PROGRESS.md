@@ -4,7 +4,7 @@ Pass 1 = build/wip build-out. Pass 2 = clean replay onto main. Update the row fo
 
 | step | pass | status | commit | notes |
 |---|---|---|---|---|
-| steps/00-setup.md | pass1 | not-started | | |
+| steps/00-setup.md | pass1 | in-progress | | |
 | steps/10-stage0-chat-loop.md | pass1 | not-started | | |
 | steps/20-stage1-agent-loop.md | pass1 | not-started | | |
 | steps/30-stage2-fs-tools.md | pass1 | not-started | | |
